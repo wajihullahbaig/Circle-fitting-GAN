@@ -24,7 +24,7 @@ def create_video_from_images(folder):
     for img in valid_images:
         print(img)        
         loaded_img = cv2.imread(os.path.join(folder, img))        
-        for i in range(20):
+        for i in range(15):
             vid_writer.write(loaded_img)
 
     vid_writer.release()
