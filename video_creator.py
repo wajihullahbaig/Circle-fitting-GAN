@@ -10,7 +10,7 @@ import os
 
 # create video from frames
 def create_video_from_images(folder):
-    video_filename = 'fit_3_features.mp4'
+    video_filename = 'fit_2_features.mp4'
     valid_images = [i for i in os.listdir(folder) if i.endswith((".jpg", ".jpeg", ".png"))]
     # sort files on creation data
     valid_images.sort(key=lambda f: os.path.getctime(os.path.join(folder, f)))
@@ -30,5 +30,5 @@ def create_video_from_images(folder):
     vid_writer.release()
 
 # Create video from resized images
-img_dir = 'images_fit_theta_314/'
+img_dir = 'images_fit_2_features/'
 create_video_from_images(img_dir)
