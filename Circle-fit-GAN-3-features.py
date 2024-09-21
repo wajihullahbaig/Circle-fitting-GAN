@@ -115,6 +115,7 @@ def train_gan(epochs, dataset_size, batch_size,n_featuresm):
                 plt.savefig(f'images/{epoch}_{batch_count}.jpg', bbox_inches='tight')
                 plt.clf()
                 plt.close()
+                generator.train()
                 
 
         
