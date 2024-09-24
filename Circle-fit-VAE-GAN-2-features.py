@@ -25,7 +25,6 @@ def generate_real_data(n):
 def noise_generator(start,end,batch_size):
     z1 = np.random.randint(start, end, size=batch_size).astype(np.float32)/end
     z2 = np.random.randint(start, end, size=batch_size).astype(np.float32)/end
-    #z3 = 2*np.pi*np.random.randint(start, end, size=batch_size).astype(np.float32)/end
     z = np.column_stack((z1,z2))   
     z = torch.from_numpy(z)    
     return z
@@ -136,6 +135,7 @@ def train_gan(vae_encoder,vae_decoder,discriminator,optimizer_vae,optimizer_disc
                 plt.close()
                 vae_decoder.train()
 
+
                 
 
 
@@ -153,7 +153,7 @@ dataset_size = 360
 
 
 optimizer_vae = optim.Adam(list(vae_encoder.parameters()) + list(vae_decoder.parameters()), lr=0.0001)
-optimizer_disc = optim.Adam(discriminator.parameters(), lr=0.0002)
+optimizer_disc = optim.Adam(discriminator.parameters(), lr=0.0001)
 
 
 train_gan(vae_encoder,vae_decoder,discriminator,optimizer_vae,optimizer_disc,epochs,dataset_size, batch_size,n_features)
@@ -161,12 +161,10 @@ train_gan(vae_encoder,vae_decoder,discriminator,optimizer_vae,optimizer_disc,epo
 # Lets take sample from training data to generate synthetic data
 vae_encoder.train()
 vae_decoder.train()
-x_real, y_real = generate_real_data(batch_size)    
-circle_data = torch.cat((x_real, y_real), dim=1)
-z = generate_real_data(circle_data)
+z = noise_generator(-180,180,dataset_size)    
 mu, logvar = vae_encoder(z)
 z = reparameterize(mu, logvar)
-generated = vae_decoder(z.int()).detach()
+generated = vae_decoder(z).detach()
 
 
 
