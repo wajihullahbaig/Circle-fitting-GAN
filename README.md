@@ -1,5 +1,7 @@
 # Circle fitting GAN
 A simple GAN code to learn on how it can fit a Circle using 2 and 3 features
+<img width="481" alt="GAN architectures" src="https://github.com/user-attachments/assets/c788dc8c-9b4c-4450-b2fc-f19e62b10fe8">
+
 
 <img width="755" alt="screen-shots" src="https://github.com/user-attachments/assets/83abbe19-4f33-4ff9-8cad-2318315794bf">
 
