@@ -159,12 +159,13 @@ optimizer_disc = optim.Adam(discriminator.parameters(), lr=0.0001)
 train_gan(vae_encoder,vae_decoder,discriminator,optimizer_vae,optimizer_disc,epochs,dataset_size, batch_size,n_features)
 
 # Lets take sample from training data to generate synthetic data
-vae_encoder.train()
-vae_decoder.train()
-z = noise_generator(-180,180,dataset_size)    
-mu, logvar = vae_encoder(z)
-z = reparameterize(mu, logvar)
-generated = vae_decoder(z).detach()
+vae_encoder.eval()
+vae_decoder.eval()
+with torch.no_grad():
+    z = noise_generator(-180,180,dataset_size)    
+    mu, logvar = vae_encoder(z)
+    z = reparameterize(mu, logvar)
+    generated = vae_decoder(z).detach()
 
 
 

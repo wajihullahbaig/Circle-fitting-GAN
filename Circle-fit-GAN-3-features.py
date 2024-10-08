@@ -141,7 +141,8 @@ train_gan(epochs,dataset_size, batch_size,n_features)
 
 z = noise_generator(-180,180,batch_size)
 generator.eval()
-generated = generator(z).detach()
+with torch.no_grad():
+    generated = generator(z).detach()
 
 
 plt.figure(figsize=(10,5))
